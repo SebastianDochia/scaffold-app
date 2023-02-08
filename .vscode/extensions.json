@@ -1,0 +1,23 @@
+{
+    // Recommended extensions for this reppository.
+    // Check out https://code.visualstudio.com/docs/editor/extension-marketplace#_workspace-recommended-extensions for more details.
+    "recommendations": [
+        "johnpapa.Angular2",
+        "natewallace.angular2-inline",
+        "alexiv.vscode-angular2-files",
+        "ghaschel.vscode-angular-html",
+        "kamikillerto.vscode-colorize",
+        "dbaeumer.vscode-eslint",
+        "mrmlnc.vscode-scss",
+        "sibiraj-s.vscode-scss-formatter",
+        "wayou.vscode-todo-highlight",
+        "pkief.material-icon-theme",
+        "eamodio.gitlens",
+        "IBM.output-colorizer",
+        "dozerg.tsimportsorter",
+        "christian-kohler.npm-intellisense",
+        "christian-kohler.path-intellisense",
+        "formulahendry.auto-rename-tag",
+        "xabikos.javascriptsnippets",
+    ]
+}

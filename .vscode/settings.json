@@ -1,0 +1,51 @@
+{
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "workbench.enableExperiments": false,
+  "breadcrumbs.enabled": true,
+  "files.exclude": {
+    "**/dist": true,
+    "**/node_modules": true,
+  },
+  "files.watcherExclude": {
+    "**/dist": true,
+    "**/node_modules": true,
+  },
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.quoteStyle": "single",
+  "html.format.wrapAttributes": "force-aligned",
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "[scss]": {
+    "editor.tabSize": 4
+  },
+  "[html]": {
+    "editor.tabSize": 4
+  },
+  "editor.detectIndentation": false,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "sonarlint.testFilePattern": "{**/nightwatch-e2e/**,**/spec.ts,**/*test*,**/*Test*}",
+  "colorize.include": [
+    "src/**/*.scss"
+  ],
+  "colorize.languages": [
+    "css",
+    "sass",
+    "scss",
+    "less",
+    "svg"
+  ],
+  "colorize.colorized_variables": [
+    "SASS"
+  ],
+  "colorize.enable_search_variables": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "scssFormatter.tabWidth": 4,
+  "search.exclude": {
+    "**/node_modules/@uipath": false
+  }
+}
