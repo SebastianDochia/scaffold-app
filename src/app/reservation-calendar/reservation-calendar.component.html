@@ -1,9 +1,12 @@
 <div>
-    <mat-card class="demo-inline-calendar-card">
-        <mat-calendar [(selected)]="selected"
-                      [minDate]="minDate"
-                      [maxDate]="maxDate"
-                      [dateFilter]="dateFilter"></mat-calendar>
+    <mat-card class="widget-card">
+        <mat-card class="calendar-card">
+            <mat-calendar [(selected)]="selected"
+                          [minDate]="minDate"
+                          [maxDate]="maxDate"
+                          [dateFilter]="dateFilter"></mat-calendar>
+        </mat-card>
+        <rc-selected-date-container [selected]="selected"
+                                    [dateSelectMessage]="dateSelectMessage"></rc-selected-date-container>
     </mat-card>
-    <app-selected-date-container [selected]="selected"></app-selected-date-container>
 </div>

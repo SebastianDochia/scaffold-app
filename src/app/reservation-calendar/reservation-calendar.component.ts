@@ -9,6 +9,9 @@ import {
   DEFAULT_DATE_FILTER,
 } from 'src/app/reservation-calendar/constants/default-date-filter';
 import {
+  DEFAULT_DATE_SELECT_MESSAGE,
+} from 'src/app/reservation-calendar/constants/default-date-select-message';
+import {
   DEFAULT_STYLE_CONFIG,
 } from 'src/app/reservation-calendar/constants/default-style-config';
 import {
@@ -36,6 +39,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReservationCalendarComponent implements OnInit {
+  @Input() dateSelectMessage: string = DEFAULT_DATE_SELECT_MESSAGE;
   @Input() styleConfig: StyleConfig = DEFAULT_STYLE_CONFIG;
   @Input() systemConfig: SystemConfig = DEFAULT_SYSTEM_CONFIG;
   @Input() dateFilers: DateFilters = DEFAULT_DATE_FILTER;

@@ -6,13 +6,14 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'app-selected-date-container',
+  selector: 'rc-selected-date-container',
   templateUrl: './selected-date-container.component.html',
   styleUrls: ['./selected-date-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectedDateContainerComponent implements OnInit {
   @Input() selected: null | Date = null;
+  @Input() dateSelectMessage: null | string = null;
 
   constructor() { }
 
