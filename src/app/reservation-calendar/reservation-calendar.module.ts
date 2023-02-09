@@ -4,11 +4,11 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import {
+  SelectedDateContainerComponent,
+} from 'src/app/reservation-calendar/components/selected-date-container/selected-date-container.component';
+import {
   ReservationCalendarComponent,
 } from 'src/app/reservation-calendar/reservation-calendar.component';
-import {
-  SelectedDateContainerComponent,
-} from 'src/app/reservation-calendar/selected-date-container/selected-date-container.component';
 
 @NgModule({
   declarations: [
