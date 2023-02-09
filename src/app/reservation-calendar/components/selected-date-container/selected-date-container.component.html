@@ -1,32 +1,36 @@
 <div>
-    <mat-card-header>
-        <h1>{{ (selected | date:'mediumDate' ) || dateSelectMessage || 'ERR' }}</h1>
-    </mat-card-header>
-    <mat-card-content>
-        <ng-container *ngIf="selected; else inputSkeleton">
-            <div class="field-button-group">
-                <mat-form-field appearance="fill">
-                    <mat-label>Select Desired Time</mat-label>
-                    <mat-select>
-                        <mat-option value="one">First option</mat-option>
-                        <mat-option value="two">Second option</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <button mat-fab
-                        color="accent"
-                        aria-label="Example icon button with a bookmark icon">
-                    <mat-icon>chevron_right</mat-icon>
-                </button>
-            </div>
-            <p class="tip">*Only available times are displayed.</p>
-        </ng-container>
-    </mat-card-content>
+    <mat-card>
+        <mat-card-header>
+            <h1>{{ (selected | date:'mediumDate' ) || selectDateMessage || 'ERR' }}</h1>
+        </mat-card-header>
+        <mat-card-content>
+            <ng-container *ngIf="selected; else inputSkeleton">
+                <div class="field-button-group">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Select Desired Time</mat-label>
+                        <mat-select>
+                            <mat-option value="one">First option</mat-option>
+                            <mat-option value="two">Second option</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <button mat-fab
+                            color="accent"
+                            aria-label="Example icon button with a bookmark icon"
+                            class="next-button">
+                        <mat-icon>chevron_right</mat-icon>
+                    </button>
+                </div>
+                <p class="tip">*Only available times are displayed.</p>
+            </ng-container>
+        </mat-card-content>
+    </mat-card>
 </div>
 
 <ng-template #inputSkeleton>
     <div class="field-button-group">
         <div class="skeleton input-skeleton"></div>
-        <div class="skeleton round-button-skeleton"></div>
+        <div class="skeleton round-button-skeleton next-button"></div>
     </div>
     <div class="skeleton tip-skeleton"></div>
 </ng-template>

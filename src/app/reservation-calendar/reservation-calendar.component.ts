@@ -6,12 +6,6 @@ import {
 } from '@angular/core';
 
 import {
-  DEFAULT_DATE_FILTER,
-} from 'src/app/reservation-calendar/constants/default-date-filter';
-import {
-  DEFAULT_DATE_SELECT_MESSAGE,
-} from 'src/app/reservation-calendar/constants/default-date-select-message';
-import {
   DEFAULT_STYLE_CONFIG,
 } from 'src/app/reservation-calendar/constants/default-style-config';
 import {
@@ -26,7 +20,6 @@ import {
 import {
   FilterWeekends,
 } from 'src/app/reservation-calendar/date-filters/filter-weekends';
-import { DateFilters } from 'src/app/reservation-calendar/models/date-filters';
 import { StyleConfig } from 'src/app/reservation-calendar/models/style-config';
 import {
   SystemConfig,
@@ -39,27 +32,19 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReservationCalendarComponent implements OnInit {
-  @Input() dateSelectMessage: string = DEFAULT_DATE_SELECT_MESSAGE;
   @Input() styleConfig: StyleConfig = DEFAULT_STYLE_CONFIG;
   @Input() systemConfig: SystemConfig = DEFAULT_SYSTEM_CONFIG;
-  @Input() dateFilers: DateFilters = DEFAULT_DATE_FILTER;
-  @Input() minDate: Date;
-  @Input() maxDate: Date;
 
   selected: Date | null = null;
 
-  constructor() {
-    const currentYear = new Date().getFullYear();
-    const today = new Date();
-
-    this.minDate = new Date(today);
-    this.maxDate = new Date(currentYear + 1, 11, 31);
-  }
+  constructor() { }
 
   dateFilter = (d: Date | null): boolean => {
+    const activeFilters = this.systemConfig.dateFilers;
+
     return new FilterWeekends().shouldBeSelectable(d) &&
-      new FilterSpecificDates(this.dateFilers.filterSpecificDates).shouldBeSelectable(d) &&
-      new FilterSpecificDatesEveryYear(this.dateFilers.filterSpecificDatesEveryYear).shouldBeSelectable(d);
+      new FilterSpecificDates(activeFilters.filterSpecificDates).shouldBeSelectable(d) &&
+      new FilterSpecificDatesEveryYear(activeFilters.filterSpecificDatesEveryYear).shouldBeSelectable(d);
   }
 
   ngOnInit() {

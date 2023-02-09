@@ -1,7 +1,12 @@
-import { DateFilters } from 'src/app/reservation-calendar/models/date-filters';
+// TODO: Remove coment for production
+// export const DEFAULT_DATE_FILTER: DateFilters = {
+//   filterWeekends: false,
+//   filterSpecificDates: [],
+//   filterSpecificDatesEveryYear: [],
+// }
 
-export const DEFAULT_DATE_FILTER: DateFilters = {
+export const DEFAULT_DATE_FILTER = {
   filterWeekends: false,
-  filterSpecificDates: [],
-  filterSpecificDatesEveryYear: [],
+  filterSpecificDates: [new Date(2023, 1, 15)],
+  filterSpecificDatesEveryYear: [new Date(2023, 1, 16),],
 }

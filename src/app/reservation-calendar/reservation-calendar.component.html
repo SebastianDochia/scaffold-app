@@ -1,12 +1,12 @@
 <div>
-    <mat-card class="widget-card">
+    <div class="widget-card">
         <mat-card class="calendar-card">
             <mat-calendar [(selected)]="selected"
-                          [minDate]="minDate"
-                          [maxDate]="maxDate"
+                          [minDate]="systemConfig.minDate"
+                          [maxDate]="systemConfig.maxDate"
                           [dateFilter]="dateFilter"></mat-calendar>
         </mat-card>
         <rc-selected-date-container [selected]="selected"
-                                    [dateSelectMessage]="dateSelectMessage"></rc-selected-date-container>
-    </mat-card>
+                                    [selectDateMessage]="systemConfig.selectDateMessage"></rc-selected-date-container>
+    </div>
 </div>

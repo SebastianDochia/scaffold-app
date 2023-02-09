@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 
-import { DateFilters } from 'src/app/reservation-calendar/models/date-filters';
+import {
+  DEFAULT_SYSTEM_CONFIG,
+} from 'src/app/reservation-calendar/constants/default-system-config';
+import {
+  SystemConfig,
+} from 'src/app/reservation-calendar/models/system-config';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +13,6 @@ import { DateFilters } from 'src/app/reservation-calendar/models/date-filters';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  dateFilters: DateFilters = {
-    filterWeekends: false,
-    filterSpecificDates: [new Date(2023, 1, 15)],
-    filterSpecificDatesEveryYear: [new Date(2023, 1, 16),],
-  }
+  sysConf: SystemConfig = DEFAULT_SYSTEM_CONFIG;
 
 }

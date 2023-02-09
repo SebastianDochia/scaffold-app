@@ -13,7 +13,7 @@ import {
 })
 export class SelectedDateContainerComponent implements OnInit {
   @Input() selected: null | Date = null;
-  @Input() dateSelectMessage: null | string = null;
+  @Input() selectDateMessage: null | string = null;
 
   constructor() { }
 
