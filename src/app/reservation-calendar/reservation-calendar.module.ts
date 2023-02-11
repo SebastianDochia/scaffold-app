@@ -12,6 +12,9 @@ import {
   SelectedDateContainerComponent,
 } from 'src/app/reservation-calendar/components/selected-date-container/selected-date-container.component';
 import {
+  ngLetModule,
+} from 'src/app/reservation-calendar/directives/ngLet.module';
+import {
   ReservationCalendarComponent,
 } from 'src/app/reservation-calendar/reservation-calendar.component';
 
@@ -28,13 +31,11 @@ import {
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
-    MatIconModule
-  ],
-  providers: [
-
+    MatIconModule,
+    ngLetModule,
   ],
   exports: [
-    ReservationCalendarComponent
+    ReservationCalendarComponent,
   ]
 })
 export class ReservationCalendarModule { }

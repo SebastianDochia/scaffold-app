@@ -6,13 +6,17 @@
         <mat-card-content>
             <ng-container *ngIf="selected; else inputSkeleton">
                 <div class="field-button-group">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Select Desired Time</mat-label>
-                        <mat-select>
-                            <mat-option value="one">First option</mat-option>
-                            <mat-option value="two">Second option</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <ng-container *ngIf="businessHours">
+                        <ng-container *ngLet="getCurrentDayHours(businessHours, selected) as selectedDay">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Select Desired Time</mat-label>
+                                <mat-select>
+                                    <mat-option *ngFor="let hour of selectedDay"
+                                                value="hour">{{ hour | date:'shortTime' }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </ng-container>
+                    </ng-container>
 
                     <button mat-fab
                             color="accent"
