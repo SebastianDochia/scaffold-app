@@ -10,9 +10,9 @@
                         <ng-container *ngLet="getCurrentDayHours(businessHours, selected) as selectedDay">
                             <mat-form-field appearance="fill">
                                 <mat-label>Select Desired Time</mat-label>
-                                <mat-select>
+                                <mat-select (selectionChange)="hourSelected($event.value)">
                                     <mat-option *ngFor="let hour of selectedDay"
-                                                value="hour">{{ hour | date:'shortTime' }}</mat-option>
+                                                [value]="hour">{{ hour | date:'shortTime' }}</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </ng-container>

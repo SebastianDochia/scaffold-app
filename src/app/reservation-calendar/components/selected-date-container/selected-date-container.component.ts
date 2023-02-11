@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
 } from '@angular/core';
 
 import {
@@ -19,11 +21,31 @@ export class SelectedDateContainerComponent implements OnInit {
   @Input() selected: null | Date = null;
   @Input() selectDateMessage: null | string = null;
   @Input() businessHours: null | BusinessHours = null;
+  @Output() selectedDateTime = new EventEmitter<Date>();
 
   constructor() { }
 
   getCurrentDayHours(hours: BusinessHours, selected: Date) {
     return hours[selected.getDay()];
+  }
+
+  hourSelected(hour: Date) {
+    let selectedDateTime: null | Date = null;
+
+    if (this.selected) {
+      selectedDateTime = new Date(
+        this.selected.getFullYear(),
+        this.selected.getMonth(),
+        this.selected.getDate(),
+        hour.getHours(),
+        hour.getMinutes(),
+        hour.getSeconds()
+      );
+    }
+
+    console.log(selectedDateTime);
+
+    this.selectedDateTime.emit();
   }
 
   ngOnInit() {
