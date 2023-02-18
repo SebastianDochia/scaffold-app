@@ -47,6 +47,11 @@ export class ReservationCalendarComponent implements OnInit {
       new FilterSpecificDatesEveryYear(activeFilters.filterSpecificDatesEveryYear).shouldBeSelectable(d);
   }
 
+  onSelectDateTime(dateTime: Date) {
+    this.selected = dateTime;
+    console.log(this.selected);
+  }
+
   ngOnInit() {
   }
 }

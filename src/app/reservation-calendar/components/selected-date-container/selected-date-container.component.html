@@ -1,7 +1,9 @@
 <div>
     <mat-card>
         <mat-card-header>
-            <h1>{{ (selected | date:'mediumDate' ) || selectDateMessage || 'ERR' }}</h1>
+            <ng-container *ngIf="!isHourSelected else titleWithDate">
+                <h1>{{ (selected | date:'mediumDate' ) || selectDateMessage || 'ERR' }}</h1>
+            </ng-container>
         </mat-card-header>
         <mat-card-content>
             <ng-container *ngIf="selected; else inputSkeleton">
@@ -21,7 +23,9 @@
                     <button mat-fab
                             color="accent"
                             aria-label="Example icon button with a bookmark icon"
-                            class="next-button">
+                            class="next-button"
+                            [disabled]="!isHourSelected"
+                            (click)="confirmHour()">
                         <mat-icon>chevron_right</mat-icon>
                     </button>
                 </div>
@@ -37,4 +41,8 @@
         <div class="skeleton round-button-skeleton next-button"></div>
     </div>
     <div class="skeleton tip-skeleton"></div>
+</ng-template>
+
+<ng-template #titleWithDate>
+    <h1>{{ (selected | date:'medium' ) || selectDateMessage || 'ERR' }}</h1>
 </ng-template>

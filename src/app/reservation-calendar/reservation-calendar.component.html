@@ -8,6 +8,7 @@
         </mat-card>
         <rc-selected-date-container [selected]="selected"
                                     [selectDateMessage]="systemConfig.selectDateMessage"
-                                    [businessHours]="systemConfig.hours"></rc-selected-date-container>
+                                    [businessHours]="systemConfig.hours"
+                                    (selectedDateTime)="onSelectDateTime($event)"></rc-selected-date-container>
     </div>
 </div>

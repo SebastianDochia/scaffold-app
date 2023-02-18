@@ -23,6 +23,8 @@ export class SelectedDateContainerComponent implements OnInit {
   @Input() businessHours: null | BusinessHours = null;
   @Output() selectedDateTime = new EventEmitter<Date>();
 
+  public isHourSelected = false;
+
   constructor() { }
 
   getCurrentDayHours(hours: BusinessHours, selected: Date) {
@@ -30,10 +32,9 @@ export class SelectedDateContainerComponent implements OnInit {
   }
 
   hourSelected(hour: Date) {
-    let selectedDateTime: null | Date = null;
 
     if (this.selected) {
-      selectedDateTime = new Date(
+      this.selected = new Date(
         this.selected.getFullYear(),
         this.selected.getMonth(),
         this.selected.getDate(),
@@ -43,9 +44,13 @@ export class SelectedDateContainerComponent implements OnInit {
       );
     }
 
-    console.log(selectedDateTime);
+    this.isHourSelected = true;
+  }
 
-    this.selectedDateTime.emit();
+  confirmHour() {
+    if (this.selected) {
+      this.selectedDateTime.emit(this.selected);
+    }
   }
 
   ngOnInit() {
