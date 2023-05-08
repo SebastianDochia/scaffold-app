@@ -2,8 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnInit,
 } from '@angular/core';
+import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 
 import {
   DEFAULT_STYLE_CONFIG,
@@ -31,7 +31,7 @@ import {
   styleUrls: ['./reservation-calendar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReservationCalendarComponent implements OnInit {
+export class ReservationCalendarComponent {
   @Input() styleConfig: StyleConfig = DEFAULT_STYLE_CONFIG;
   @Input() systemConfig: SystemConfig = DEFAULT_SYSTEM_CONFIG;
 
@@ -47,11 +47,19 @@ export class ReservationCalendarComponent implements OnInit {
       new FilterSpecificDatesEveryYear(activeFilters.filterSpecificDatesEveryYear).shouldBeSelectable(d);
   }
 
+  dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
+    if (view === 'month') {
+      const date = cellDate.getDate();
+
+      // Highlight the 1st and 20th day of each month.
+      return date === 1 || date === 20 ? 'red-date' : '';
+    }
+
+    return '';
+  }
+
   onSelectDateTime(dateTime: Date) {
     this.selected = dateTime;
     console.log(this.selected);
-  }
-
-  ngOnInit() {
   }
 }

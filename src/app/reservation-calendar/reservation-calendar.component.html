@@ -4,7 +4,8 @@
             <mat-calendar [(selected)]="selected"
                           [minDate]="systemConfig.minDate"
                           [maxDate]="systemConfig.maxDate"
-                          [dateFilter]="dateFilter"></mat-calendar>
+                          [dateFilter]="dateFilter"
+                          [dateClass]="dateClass"></mat-calendar>
         </mat-card>
         <rc-selected-date-container [selected]="selected"
                                     [selectDateMessage]="systemConfig.selectDateMessage"

@@ -10,5 +10,5 @@ export const DEFAULT_BUSINESS_HOURS: BusinessHours = [
   [new Date(2023, 1, 15, 9, 0)],
   [new Date(2023, 1, 15, 9, 0)],
   [new Date(2023, 1, 15, 9, 0)],
-]
+];
 

@@ -6,7 +6,7 @@
 // }
 
 export const DEFAULT_DATE_FILTER = {
-  filterWeekends: false,
-  filterSpecificDates: [new Date(2023, 1, 15)],
-  filterSpecificDatesEveryYear: [new Date(2023, 1, 16),],
+  filterWeekends: true,
+  filterSpecificDates: [new Date(2023, 3, 30)],
+  filterSpecificDatesEveryYear: [new Date(2023, 3, 16),],
 }
