@@ -1,0 +1,11 @@
+.wraping-flex {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+eb-edit-box {
+    margin: auto;
+    margin-top: 50px;
+    width: 80%;
+}

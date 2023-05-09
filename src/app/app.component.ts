@@ -14,5 +14,4 @@ import {
 })
 export class AppComponent {
   sysConf: SystemConfig = DEFAULT_SYSTEM_CONFIG;
-
 }

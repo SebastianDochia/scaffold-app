@@ -1,0 +1,29 @@
+mat-card-content {
+    padding: 30px;
+}
+
+.options-form {
+    display: flex;
+    flex-direction: column;
+
+    .side-by-side-group {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    mat-form-field {
+        width: 300px;
+    }
+
+    mat-checkbox {
+        margin-top: 20px;
+        margin-bottom: 40px;
+        width: 300px;
+    }
+
+    mat-chip-list {
+        margin-top: 32px;
+        width: 300px;
+    }
+}
