@@ -37,6 +37,7 @@
                     <mat-form-field appearance="fill">
                         <mat-label>Choose a date</mat-label>
                         <input matInput
+                               (dateChange)="addDate($event)"
                                [matDatepicker]="picker">
                         <mat-hint>MM/DD/YYYY</mat-hint>
                         <mat-datepicker-toggle matSuffix
@@ -45,27 +46,31 @@
                     </mat-form-field>
                 </div>
 
-                <mat-chip-list aria-label="Fish selection">
-                    <mat-chip *ngFor="let date of dates"
-                              color="primary"
-                              [removable]="true"
-                              (removed)="removeDate(date)">
-                        {{date | date:'mediumDate'}}
-                        <button matChipRemove>
-                            <mat-icon>cancel</mat-icon>
-                        </button>
-                    </mat-chip>
-
-                    <mat-chip *ngFor="let date of dates"
-                              color="accent"
-                              [removable]="true"
-                              (removed)="removeDate(date)">
-                        {{date | date:'mediumDate'}}
-                        <button matChipRemove>
-                            <mat-icon>cancel</mat-icon>
-                        </button>
-                    </mat-chip>
-                </mat-chip-list>
+                <div>
+                    <p class="hint">*Click on an item to toggle from specific date to yearly</p>
+                    <mat-chip-list aria-label="Fish selection">
+                        <mat-chip *ngFor="let date of filterSpecificDates"
+                                  color="primary"
+                                  [removable]="true"
+                                  (removed)="removeSpecificDate(date)"
+                                  (click)="toggleDateToEveryYear(date)">
+                            {{date | date:'mediumDate'}}
+                            <button matChipRemove>
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip>
+                        <mat-chip *ngFor="let date of filterSpecificDatesEveryYear"
+                                  class="accent"
+                                  [removable]="true"
+                                  (removed)="removeSpecificDateEveryYear(date)"
+                                  (click)="toggleDateToSpecific(date)">
+                            {{date | date:'MMM d'}}
+                            <button matChipRemove>
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip>
+                    </mat-chip-list>
+                </div>
             </div>
 
         </form>

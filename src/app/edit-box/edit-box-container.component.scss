@@ -10,6 +10,11 @@ mat-card-content {
         display: flex;
         justify-content: space-between;
         margin-bottom: 20px;
+
+        mat-chip-list {
+            width: 300px;
+            display: inline-block;
+        }
     }
 
     mat-form-field {
@@ -22,8 +27,7 @@ mat-card-content {
         width: 300px;
     }
 
-    mat-chip-list {
-        margin-top: 32px;
-        width: 300px;
+    .accent {
+        background-color: #ffd740;
     }
 }
