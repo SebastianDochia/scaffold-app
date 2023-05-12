@@ -5,7 +5,7 @@ import { DateFilters } from 'src/app/reservation-calendar/models/date-filters';
 
 export interface SystemConfig {
   selectDateMessage: string,
-  dateFilers: DateFilters,
+  dateFilters: DateFilters,
   hours: BusinessHours,
   minDate: Date,
   maxDate: Date,

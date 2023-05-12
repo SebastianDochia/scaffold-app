@@ -1,18 +1,25 @@
 import {
-  ChangeDetectionStrategy,
   Component,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+
+import { DateFilters } from 'src/app/reservation-calendar/models/date-filters';
 
 @Component({
   selector: 'eb-edit-box',
   templateUrl: './edit-box-container.component.html',
   styleUrls: ['./edit-box-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class EditBoxComponent {
   filterSpecificDates: Array<Date> = [];
   filterSpecificDatesEveryYear: Array<Date> = [];
+  openWeekends: boolean = false;
+
+  @Output()
+  filterDates = new EventEmitter<DateFilters>();
 
   removeSpecificDate(date: Date) {
     this.removeDate(this.filterSpecificDates, date);
@@ -30,15 +37,22 @@ export class EditBoxComponent {
     this.toggleDate(this.filterSpecificDatesEveryYear, this.filterSpecificDates, date);
   }
 
+  toggleWeekends(checked: boolean) {
+    this.openWeekends = checked;
+
+    this.emitData();
+  }
+
   addDate(event: MatDatepickerInputEvent<Date>) {
     if (event.value) {
       const date = event.value;
       const index = this.filterSpecificDates.indexOf(date);
-      console.log(index);
-      console.log(this.filterSpecificDates);
+
       if (index < 0) {
         this.filterSpecificDates.push(date);
       }
+
+      this.emitData();
     }
   }
 
@@ -50,6 +64,8 @@ export class EditBoxComponent {
       switchFrom.splice(switchFromIndex, 1);
 
       switchTo.push(date);
+
+      this.emitData();
     }
   }
 
@@ -58,6 +74,16 @@ export class EditBoxComponent {
 
     if (index >= 0) {
       datesArray.splice(index, 1);
+
+      this.emitData();
     }
+  }
+
+  private emitData() {
+    this.filterDates.emit({
+      filterWeekends: !this.openWeekends,
+      filterSpecificDates: this.filterSpecificDates,
+      filterSpecificDatesEveryYear: this.filterSpecificDatesEveryYear
+    });
   }
 }

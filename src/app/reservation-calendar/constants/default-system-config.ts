@@ -13,7 +13,7 @@ import {
 
 export const DEFAULT_SYSTEM_CONFIG: SystemConfig = {
   selectDateMessage: DEFAULT_DATE_SELECT_MESSAGE,
-  dateFilers: DEFAULT_DATE_FILTER,
+  dateFilters: DEFAULT_DATE_FILTER,
   hours: DEFAULT_BUSINESS_HOURS,
   minDate: new Date(),
   maxDate: new Date(new Date().getFullYear() + 1, 11, 31),

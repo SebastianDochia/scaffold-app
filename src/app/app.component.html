@@ -1,5 +1,5 @@
 <div class="wraping-flex">
-  <app-reservation-calendar [systemConfig]="sysConf"></app-reservation-calendar>
+    <app-reservation-calendar [systemConfig]="sysConf"></app-reservation-calendar>
 
-  <eb-edit-box></eb-edit-box>
+    <eb-edit-box (filterDates)="onDataChange($event)"></eb-edit-box>
 </div>

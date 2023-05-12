@@ -1,10 +1,15 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   Input,
+  OnInit,
+  ViewChild,
 } from '@angular/core';
-import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
+import {
+  MatCalendar,
+  MatCalendarCellClassFunction,
+} from '@angular/material/datepicker';
 
+import { BehaviorSubject } from 'rxjs';
 import {
   DEFAULT_STYLE_CONFIG,
 } from 'src/app/reservation-calendar/constants/default-style-config';
@@ -29,22 +34,33 @@ import {
   selector: 'app-reservation-calendar',
   templateUrl: './reservation-calendar.component.html',
   styleUrls: ['./reservation-calendar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReservationCalendarComponent {
+export class ReservationCalendarComponent implements OnInit {
+  @ViewChild('calendar') calendar!: MatCalendar<Date>;
+
   @Input() styleConfig: StyleConfig = DEFAULT_STYLE_CONFIG;
-  @Input() systemConfig: SystemConfig = DEFAULT_SYSTEM_CONFIG;
+  @Input() systemConfig: BehaviorSubject<SystemConfig> = new BehaviorSubject(DEFAULT_SYSTEM_CONFIG);
+
+  dateFilter: (d: Date | null) => boolean = () => true;
 
   selected: Date | null = null;
 
   constructor() { }
 
-  dateFilter = (d: Date | null): boolean => {
-    const activeFilters = this.systemConfig.dateFilers;
+  ngOnInit(): void {
+    this.systemConfig.subscribe((value: SystemConfig) => {
+      this.dateFilter = (d: Date | null): boolean => {
+        const activeFilters = value.dateFilters;
 
-    return new FilterWeekends().shouldBeSelectable(d) &&
-      new FilterSpecificDates(activeFilters.filterSpecificDates).shouldBeSelectable(d) &&
-      new FilterSpecificDatesEveryYear(activeFilters.filterSpecificDatesEveryYear).shouldBeSelectable(d);
+        return new FilterWeekends().shouldBeSelectable(d) &&
+          new FilterSpecificDates(activeFilters.filterSpecificDates).shouldBeSelectable(d) &&
+          new FilterSpecificDatesEveryYear(activeFilters.filterSpecificDatesEveryYear).shouldBeSelectable(d);
+      }
+
+      if (this.calendar) {
+        this.calendar.updateTodaysDate();
+      }
+    });
   }
 
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {

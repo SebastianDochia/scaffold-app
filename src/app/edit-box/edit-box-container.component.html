@@ -28,7 +28,7 @@
                            type="number">
                 </mat-form-field>
 
-                <mat-checkbox>Open on weekends</mat-checkbox>
+                <mat-checkbox (change)="toggleWeekends($event.checked)">Open on weekends</mat-checkbox>
             </div>
 
             <div class="side-by-side-group">

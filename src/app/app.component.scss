@@ -1,11 +1,18 @@
 .wraping-flex {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+app-reservation-calendar {
+    width: 500px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 eb-edit-box {
-    margin: auto;
     margin-top: 50px;
     width: 80%;
+    max-width: 1000px;
 }
