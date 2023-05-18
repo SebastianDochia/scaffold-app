@@ -3,6 +3,11 @@ import {
   EventEmitter,
   Output,
 } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 import { DateFilters } from 'src/app/reservation-calendar/models/date-filters';
@@ -17,6 +22,15 @@ export class EditBoxComponent {
   filterSpecificDates: Array<Date> = [];
   filterSpecificDatesEveryYear: Array<Date> = [];
   openWeekends: boolean = false;
+
+  datesForm = new FormGroup({
+    bookingDuration: new FormControl('', Validators.required),
+    openingHour: new FormControl('', Validators.required),
+    closingHour: new FormControl('', Validators.required),
+    weekendOpeningHour: new FormControl(''),
+    weekendClosingHour: new FormControl(''),
+  });
+
 
   @Output()
   filterDates = new EventEmitter<DateFilters>();
@@ -46,7 +60,8 @@ export class EditBoxComponent {
   addDate(event: MatDatepickerInputEvent<Date>) {
     if (event.value) {
       const date = event.value;
-      const index = this.filterSpecificDates.indexOf(date);
+      //getting the index using serialized date
+      const index = this.filterSpecificDates.map(Number).indexOf(+date);
 
       if (index < 0) {
         this.filterSpecificDates.push(date);
@@ -56,9 +71,14 @@ export class EditBoxComponent {
     }
   }
 
+  onSubmit() {
+    console.log(this.datesForm.value);
+  }
+
   private toggleDate(switchFrom: Array<Date>, switchTo: Array<Date>, date: Date) {
-    const switchFromIndex = switchFrom.indexOf(date);
-    const switchToIndex = switchTo.indexOf(date);
+    //getting the index using serialized date
+    const switchFromIndex = switchFrom.map(Number).indexOf(+date);
+    const switchToIndex = switchTo.map(Number).indexOf(+date);
 
     if (switchFromIndex >= 0 && switchToIndex < 0) {
       switchFrom.splice(switchFromIndex, 1);

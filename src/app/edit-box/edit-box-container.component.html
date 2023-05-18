@@ -3,33 +3,58 @@
         <h1>Calendar options</h1>
     </mat-card-header>
     <mat-card-content>
-        <form class="options-form">
+        <form class="options-form"
+              [formGroup]="datesForm"
+              (ngSubmit)="onSubmit()">
+            <div class="side-by-side-group">
+                <mat-form-field appearance="fill">
+                    <mat-label>Booking Duration</mat-label>
+                    <input matInput
+                           placeholder="Booking Duration in minutes"
+                           type="number"
+                           formControlName="bookingDuration">
+                </mat-form-field>
+
+                <mat-checkbox (change)="toggleWeekends($event.checked)">Open on weekends</mat-checkbox>
+            </div>
+
             <div class="side-by-side-group">
                 <mat-form-field appearance="fill">
                     <mat-label>Opening Hour</mat-label>
                     <input matInput
                            placeholder="Open Hour"
-                           type="time">
+                           type="time"
+                           formControlName="openingHour">
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
                     <mat-label>Closing Hour</mat-label>
                     <input matInput
                            placeholder="Close Hour"
-                           type="time">
+                           type="time"
+                           formControlName="closingHour">
                 </mat-form-field>
             </div>
 
-            <div class="side-by-side-group">
-                <mat-form-field appearance="fill">
-                    <mat-label>Booking Duration</mat-label>
-                    <input matInput
-                           placeholder="Booking Duration in minutes"
-                           type="number">
-                </mat-form-field>
+            <ng-container *ngIf="openWeekends">
+                <div class="side-by-side-group">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Weekend Opening Hour</mat-label>
+                        <input matInput
+                               placeholder="Open Hour"
+                               type="time"
+                               formControlName="weekendOpeningHour">
+                    </mat-form-field>
 
-                <mat-checkbox (change)="toggleWeekends($event.checked)">Open on weekends</mat-checkbox>
-            </div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Weekend Closing Hour</mat-label>
+                        <input matInput
+                               placeholder="Close Hour"
+                               type="time"
+                               formControlName="weekendClosingHour">
+                    </mat-form-field>
+                </div>
+            </ng-container>
 
             <div class="side-by-side-group">
                 <div>
@@ -73,6 +98,10 @@
                 </div>
             </div>
 
+            <button class="submit-button"
+                    mat-raised-button
+                    color="primary"
+                    [disabled]="datesForm.invalid">Save</button>
         </form>
     </mat-card-content>
 </mat-card>

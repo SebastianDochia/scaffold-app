@@ -1,6 +1,7 @@
 import {
   Component,
   Input,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -9,7 +10,11 @@ import {
   MatCalendarCellClassFunction,
 } from '@angular/material/datepicker';
 
-import { BehaviorSubject } from 'rxjs';
+import {
+  BehaviorSubject,
+  Subject,
+} from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import {
   DEFAULT_STYLE_CONFIG,
 } from 'src/app/reservation-calendar/constants/default-style-config';
@@ -35,7 +40,9 @@ import {
   templateUrl: './reservation-calendar.component.html',
   styleUrls: ['./reservation-calendar.component.scss'],
 })
-export class ReservationCalendarComponent implements OnInit {
+export class ReservationCalendarComponent implements OnInit, OnDestroy {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   @ViewChild('calendar') calendar!: MatCalendar<Date>;
 
   @Input() styleConfig: StyleConfig = DEFAULT_STYLE_CONFIG;
@@ -48,11 +55,11 @@ export class ReservationCalendarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.systemConfig.subscribe((value: SystemConfig) => {
+    this.systemConfig.pipe(takeUntil(this.destroy$)).subscribe((value: SystemConfig) => {
       this.dateFilter = (d: Date | null): boolean => {
         const activeFilters = value.dateFilters;
 
-        return new FilterWeekends().shouldBeSelectable(d) &&
+        return (value.dateFilters.filterWeekends ? new FilterWeekends().shouldBeSelectable(d) : true) &&
           new FilterSpecificDates(activeFilters.filterSpecificDates).shouldBeSelectable(d) &&
           new FilterSpecificDatesEveryYear(activeFilters.filterSpecificDatesEveryYear).shouldBeSelectable(d);
       }
@@ -77,5 +84,10 @@ export class ReservationCalendarComponent implements OnInit {
   onSelectDateTime(dateTime: Date) {
     this.selected = dateTime;
     console.log(this.selected);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }
