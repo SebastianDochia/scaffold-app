@@ -1,0 +1,15 @@
+<div *ngLet="systemConfig | async as systemConfigValue">
+    <div class="widget-card">
+        <mat-card class="calendar-card">
+            <mat-calendar #calendar
+                          [(selected)]="selected"
+                          [minDate]="systemConfigValue.minDate"
+                          [maxDate]="systemConfigValue.maxDate"
+                          [dateFilter]="dateFilter"></mat-calendar>
+        </mat-card>
+        <rc-selected-date-container [selected]="selected"
+                                    [selectDateMessage]="systemConfigValue.selectDateMessage"
+                                    [businessHours]="systemConfigValue.hours"
+                                    (selectedDateTime)="onSelectDateTime($event)"></rc-selected-date-container>
+    </div>
+</div>

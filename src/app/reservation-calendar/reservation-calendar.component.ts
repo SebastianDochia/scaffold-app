@@ -1,20 +1,9 @@
 import {
   Component,
   Input,
-  OnDestroy,
-  OnInit,
-  ViewChild,
 } from '@angular/core';
-import {
-  MatCalendar,
-  MatCalendarCellClassFunction,
-} from '@angular/material/datepicker';
 
-import {
-  BehaviorSubject,
-  Subject,
-} from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 import {
   DEFAULT_STYLE_CONFIG,
 } from 'src/app/reservation-calendar/constants/default-style-config';
@@ -22,14 +11,11 @@ import {
   DEFAULT_SYSTEM_CONFIG,
 } from 'src/app/reservation-calendar/constants/default-system-config';
 import {
-  FilterSpecificDates,
-} from 'src/app/reservation-calendar/date-filters/filter-specific-dates';
+  ReservationStep,
+} from 'src/app/reservation-calendar/models/reservation-step.enum';
 import {
-  FilterSpecificDatesEveryYear,
-} from 'src/app/reservation-calendar/date-filters/filter-specific-dates-every-year';
-import {
-  FilterWeekends,
-} from 'src/app/reservation-calendar/date-filters/filter-weekends';
+  SpecificsUserSelection,
+} from 'src/app/reservation-calendar/models/specifics-user-selection';
 import { StyleConfig } from 'src/app/reservation-calendar/models/style-config';
 import {
   SystemConfig,
@@ -40,54 +26,21 @@ import {
   templateUrl: './reservation-calendar.component.html',
   styleUrls: ['./reservation-calendar.component.scss'],
 })
-export class ReservationCalendarComponent implements OnInit, OnDestroy {
-  destroy$: Subject<boolean> = new Subject<boolean>();
-
-  @ViewChild('calendar') calendar!: MatCalendar<Date>;
-
+export class ReservationCalendarComponent {
   @Input() styleConfig: StyleConfig = DEFAULT_STYLE_CONFIG;
   @Input() systemConfig: BehaviorSubject<SystemConfig> = new BehaviorSubject(DEFAULT_SYSTEM_CONFIG);
+  @Input() step: ReservationStep = ReservationStep.SPECIFICS;
 
-  dateFilter: (d: Date | null) => boolean = () => true;
+  specificsSelection: SpecificsUserSelection | null = null;
 
-  selected: Date | null = null;
-
-  constructor() { }
-
-  ngOnInit(): void {
-    this.systemConfig.pipe(takeUntil(this.destroy$)).subscribe((value: SystemConfig) => {
-      this.dateFilter = (d: Date | null): boolean => {
-        const activeFilters = value.dateFilters;
-
-        return (value.dateFilters.filterWeekends ? new FilterWeekends().shouldBeSelectable(d) : true) &&
-          new FilterSpecificDates(activeFilters.filterSpecificDates).shouldBeSelectable(d) &&
-          new FilterSpecificDatesEveryYear(activeFilters.filterSpecificDatesEveryYear).shouldBeSelectable(d);
-      }
-
-      if (this.calendar) {
-        this.calendar.updateTodaysDate();
-      }
-    });
+  isAtSpecificsStep() {
+    return this.step == ReservationStep.SPECIFICS;
   }
 
-  dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
-    if (view === 'month') {
-      const date = cellDate.getDate();
+  onUserSelection(selection: SpecificsUserSelection) {
+    console.log(selection);
+    this.specificsSelection = selection;
 
-      // Highlight the 1st and 20th day of each month.
-      return date === 1 || date === 20 ? 'red-date' : '';
-    }
-
-    return '';
-  }
-
-  onSelectDateTime(dateTime: Date) {
-    this.selected = dateTime;
-    console.log(this.selected);
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe();
+    this.step = ReservationStep.CALENDAR;
   }
 }
