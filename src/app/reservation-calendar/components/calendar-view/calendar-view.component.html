@@ -1,4 +1,10 @@
 <div *ngLet="systemConfig | async as systemConfigValue">
+    <button class="back-button"
+            mat-icon-button
+            aria-label="Example icon button with a open in new tab icon"
+            (click)="goBack()">
+        <mat-icon>arrow_back_ios</mat-icon>
+    </button>
     <div class="widget-card">
         <mat-card class="calendar-card">
             <mat-calendar #calendar

@@ -1,7 +1,9 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
   ViewChild,
 } from '@angular/core';
 import {
@@ -48,6 +50,8 @@ export class CalendarViewComponent implements OnInit {
   @Input() styleConfig: StyleConfig = DEFAULT_STYLE_CONFIG;
   @Input() systemConfig: BehaviorSubject<SystemConfig> = new BehaviorSubject(DEFAULT_SYSTEM_CONFIG);
 
+  @Output() goBackEvent = new EventEmitter()
+
   dateFilter: (d: Date | null) => boolean = () => true;
 
   selected: Date | null = null;
@@ -68,6 +72,10 @@ export class CalendarViewComponent implements OnInit {
         this.calendar.updateTodaysDate();
       }
     });
+  }
+
+  goBack() {
+    this.goBackEvent.emit();
   }
 
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {

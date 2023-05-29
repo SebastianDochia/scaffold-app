@@ -12,6 +12,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { EditBoxComponent } from 'src/app/edit-box/edit-box-container.componen';
 import {
@@ -35,6 +36,7 @@ import {
     MatIconModule,
     MatInputModule,
     MatChipsModule,
+    MatTabsModule
   ],
   exports: [
     EditBoxComponent,

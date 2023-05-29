@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  Input,
   Output,
 } from '@angular/core';
 import {
@@ -10,7 +11,18 @@ import {
 } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
+import {
+  DEFAULT_SYSTEM_CONFIG,
+} from 'src/app/reservation-calendar/constants/default-system-config';
 import { DateFilters } from 'src/app/reservation-calendar/models/date-filters';
+import {
+  AcceptedCurrencies,
+  ItemPrice,
+  ServiceOption,
+} from 'src/app/reservation-calendar/models/specific-options';
+import {
+  SystemConfig,
+} from 'src/app/reservation-calendar/models/system-config';
 
 @Component({
   selector: 'eb-edit-box',
@@ -19,9 +31,19 @@ import { DateFilters } from 'src/app/reservation-calendar/models/date-filters';
 
 })
 export class EditBoxComponent {
+  @Output() filterDates = new EventEmitter<DateFilters>();
+  @Output() firstOption = new EventEmitter<String>();
+  @Output() newSystemConfig = new EventEmitter<SystemConfig>();
+  @Input() systemConfig: SystemConfig = DEFAULT_SYSTEM_CONFIG;
+
   filterSpecificDates: Array<Date> = [];
   filterSpecificDatesEveryYear: Array<Date> = [];
   openWeekends: boolean = false;
+  optionValue: string = "";
+  subOptionName: string = "";
+  subOptionPrice: number = 0;
+
+  selectedService: ServiceOption | null = null;
 
   datesForm = new FormGroup({
     bookingDuration: new FormControl('', Validators.required),
@@ -31,9 +53,17 @@ export class EditBoxComponent {
     weekendClosingHour: new FormControl(''),
   });
 
+  servicesForm = new FormGroup({
+    firstOptionName: new FormControl(this.systemConfig.specificOptions.optionName, Validators.required),
+    services: new FormControl('', Validators.required),
+    subOption: new FormControl('', Validators.required),
+    subOptionPrice: new FormControl('', Validators.required),
+  });
 
-  @Output()
-  filterDates = new EventEmitter<DateFilters>();
+  onFirstOptionNameChange() {
+
+    this.systemConfig.specificOptions.optionName = this.servicesForm.get('firstOptionName')?.value;
+  }
 
   removeSpecificDate(date: Date) {
     this.removeDate(this.filterSpecificDates, date);
@@ -55,6 +85,58 @@ export class EditBoxComponent {
     this.openWeekends = checked;
 
     this.emitData();
+  }
+
+  addOption(option: string) {
+    this.systemConfig.specificOptions.serviceOptions.push({
+      optionName: option,
+      services: []
+    })
+  }
+
+  removeOption(option: ServiceOption) {
+    const foundOptionIndex = this.systemConfig.specificOptions.serviceOptions.findIndex(item => item.optionName === option.optionName);
+    if (foundOptionIndex !== -1) {
+      this.systemConfig.specificOptions.serviceOptions.splice(foundOptionIndex, 1);
+    }
+  }
+
+  selectOption(option: ServiceOption) {
+    this.selectedService = option;
+  }
+
+  addSubOption(subOptionName: string, subOptionPrice: number) {
+    if (this.selectedService) {
+      const newItem: ItemPrice = {
+        optionName: subOptionName,
+        price: subOptionPrice,
+        currency: AcceptedCurrencies.RON
+      }
+
+      this.systemConfig.specificOptions.serviceOptions.filter((item) => item.optionName == this.selectedService!.optionName)[0]?.services?.push(newItem);
+    }
+    this.systemConfig.specificOptions.serviceOptions
+  }
+
+  removeSubOption(option: ItemPrice) {
+    const foundOptionIndex = this.systemConfig.specificOptions.serviceOptions.findIndex(item => item.optionName === this.selectedService?.optionName);
+
+    const foundSubOptionIndex = this.systemConfig.specificOptions.serviceOptions[foundOptionIndex].services?.findIndex(item => item.optionName === option.optionName);
+    if (foundSubOptionIndex !== -1) {
+      this.systemConfig.specificOptions.serviceOptions[foundOptionIndex]?.services?.splice(foundSubOptionIndex!, 1);
+    }
+  }
+
+  shouldAddBeDisabled(subOptionName: string, subOptionPrice: number): boolean {
+    return !(subOptionName && subOptionPrice && this.selectedService);
+  }
+
+  getSubOptions(selectedOption: ServiceOption | null): Array<ItemPrice> | null {
+    if (selectedOption) {
+      return this.systemConfig.specificOptions.serviceOptions.filter((item) => item.optionName == selectedOption.optionName)[0]?.services;
+    }
+
+    return null;
   }
 
   addDate(event: MatDatepickerInputEvent<Date>) {

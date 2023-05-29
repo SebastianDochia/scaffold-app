@@ -7,5 +7,6 @@
 
 <ng-template #calendarView>
     <rc-calendar-view [styleConfig]="styleConfig"
-                      [systemConfig]="systemConfig"></rc-calendar-view>
+                      [systemConfig]="systemConfig"
+                      (goBackEvent)="changePage(ReservationStep.SPECIFICS)"></rc-calendar-view>
 </ng-template>

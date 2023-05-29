@@ -32,6 +32,7 @@ export class ReservationCalendarComponent {
   @Input() step: ReservationStep = ReservationStep.SPECIFICS;
 
   specificsSelection: SpecificsUserSelection | null = null;
+  ReservationStep = ReservationStep;
 
   isAtSpecificsStep() {
     return this.step == ReservationStep.SPECIFICS;
@@ -42,5 +43,9 @@ export class ReservationCalendarComponent {
     this.specificsSelection = selection;
 
     this.step = ReservationStep.CALENDAR;
+  }
+
+  changePage(step: ReservationStep) {
+    this.step = step;
   }
 }
