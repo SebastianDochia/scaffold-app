@@ -3,15 +3,20 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    overflow: hidden;
 }
 
 app-reservation-calendar {
     width: 500px;
     margin-top: 50px;
-    margin-bottom: 50px;
 }
 
 eb-edit-box {
     width: 80%;
     max-width: 1000px;
+    margin-top: 50px;
+}
+
+app-reservations {
+    margin: 50px;
 }

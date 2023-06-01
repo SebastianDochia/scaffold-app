@@ -1,5 +1,12 @@
-<div class="wraping-flex">
-    <app-reservation-calendar [systemConfig]="sysConf"></app-reservation-calendar>
+<mat-tab-group>
+    <mat-tab label="Reservations">
+        <app-reservations></app-reservations>
+    </mat-tab>
+    <mat-tab label="Customize Widget">
+        <div class="wraping-flex">
+            <app-reservation-calendar [systemConfig]="sysConf"></app-reservation-calendar>
 
-    <eb-edit-box (filterDates)="onDataChange($event)"></eb-edit-box>
-</div>
+            <eb-edit-box (filterDates)="onDataChange($event)"></eb-edit-box>
+        </div>
+    </mat-tab>
+</mat-tab-group>
