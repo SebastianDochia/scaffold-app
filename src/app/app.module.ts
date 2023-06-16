@@ -1,16 +1,11 @@
 import { NgModule } from '@angular/core';
-import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ReservationsModule } from 'src/app/reservations/reservations.module';
+import { AuthGuard } from 'src/app/auth/auth.guard';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EditBoxModule } from './edit-box/edit-box.module';
-import {
-  ReservationCalendarModule,
-} from './reservation-calendar/reservation-calendar.module';
 
 @NgModule({
   declarations: [
@@ -20,12 +15,10 @@ import {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ReservationCalendarModule,
-    ReservationsModule,
-    EditBoxModule,
-    MatTabsModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
