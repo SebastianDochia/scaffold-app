@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import {
@@ -13,7 +14,8 @@ import {
 
   ],
   imports: [
-    CancelReservationRoutingModule
+    CommonModule,
+    CancelReservationRoutingModule,
   ],
   providers: [],
   exports: [],

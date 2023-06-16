@@ -1,1 +1,72 @@
-<p>AUTH PAGE</p>
+<div class="auth-form-container">
+    <ng-container *ngIf="isLogPage; else signUp">
+        <mat-card>
+            <mat-card-content>
+                <h1>Log-in</h1>
+                <form class="auth-form"
+                      [formGroup]="logInForm">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input matInput
+                               placeholder="john.doe@email.com"
+                               type="email"
+                               formControlName="email">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Password</mat-label>
+                        <input matInput
+                               placeholder="Password"
+                               type="password"
+                               formControlName="password">
+                    </mat-form-field>
+                    <div class="to-sign-up">
+                        <p>Don't have an account?</p>
+                        <button (click)="togglePage()">Sign-up now!</button>
+                    </div>
+                    <div class="spacer"></div>
+                    <button mat-raised-button
+                            color="accent">Log in</button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </ng-container>
+
+    <ng-template #signUp>
+        <mat-card>
+            <mat-card-content>
+                <h1>Sign-up</h1>
+                <form class="auth-form"
+                      [formGroup]="signUpForm">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input matInput
+                               placeholder="john.doe@email.com"
+                               type="email"
+                               formControlName="email">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Full Name</mat-label>
+                        <input matInput
+                               placeholder="John Doe"
+                               type="text"
+                               formControlName="name">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Password</mat-label>
+                        <input matInput
+                               placeholder="Password"
+                               type="password"
+                               formControlName="password">
+                    </mat-form-field>
+                    <div class="to-sign-up">
+                        <p>Have an account?</p>
+                        <button (click)="togglePage()">Go to Log-in!</button>
+                    </div>
+                    <div class="spacer"></div>
+                    <button mat-raised-button
+                            color="accent">Log in</button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </ng-template>
+</div>

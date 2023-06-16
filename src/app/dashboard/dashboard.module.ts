@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 
@@ -14,11 +15,12 @@ import { ReservationsModule } from 'src/app/reservations/reservations.module';
     DashboardComponent,
   ],
   imports: [
+    CommonModule,
     DashboardRoutingModule,
     ReservationCalendarModule,
     ReservationsModule,
     EditBoxModule,
-    MatTabsModule
+    MatTabsModule,
   ],
   providers: [],
   exports: [],
