@@ -61,7 +61,6 @@ export class EditBoxComponent {
   });
 
   onFirstOptionNameChange() {
-
     this.systemConfig.specificOptions.optionName = this.servicesForm.get('firstOptionName')?.value;
   }
 

@@ -27,4 +27,12 @@ export class AuthComponent {
   togglePage() {
     this.isLogPage = !this.isLogPage;
   }
+
+  onSubmitLogIn() {
+    console.log(this.logInForm.value);
+  }
+
+  onSubmitSignUp() {
+    console.log(this.signUpForm.value);
+  }
 }

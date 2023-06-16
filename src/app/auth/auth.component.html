@@ -4,7 +4,8 @@
             <mat-card-content>
                 <h1>Log-in</h1>
                 <form class="auth-form"
-                      [formGroup]="logInForm">
+                      [formGroup]="logInForm"
+                      (ngSubmit)="onSubmitLogIn()">
                     <mat-form-field appearance="fill">
                         <mat-label>Email</mat-label>
                         <input matInput
@@ -25,7 +26,8 @@
                     </div>
                     <div class="spacer"></div>
                     <button mat-raised-button
-                            color="accent">Log in</button>
+                            color="accent"
+                            [disabled]="!logInForm.valid">Log In</button>
                 </form>
             </mat-card-content>
         </mat-card>
@@ -36,7 +38,8 @@
             <mat-card-content>
                 <h1>Sign-up</h1>
                 <form class="auth-form"
-                      [formGroup]="signUpForm">
+                      [formGroup]="signUpForm"
+                      (ngSubmit)="onSubmitSignUp()">
                     <mat-form-field appearance="fill">
                         <mat-label>Email</mat-label>
                         <input matInput
@@ -64,7 +67,8 @@
                     </div>
                     <div class="spacer"></div>
                     <button mat-raised-button
-                            color="accent">Log in</button>
+                            color="accent"
+                            [disabled]="!signUpForm.valid">Sign Up</button>
                 </form>
             </mat-card-content>
         </mat-card>
