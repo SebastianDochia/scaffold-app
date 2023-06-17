@@ -20,3 +20,10 @@ eb-edit-box {
 app-reservations {
     margin: 50px;
 }
+
+.user-button {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    z-index: 1000;
+}

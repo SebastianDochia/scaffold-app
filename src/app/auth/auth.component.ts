@@ -5,13 +5,19 @@ import {
   Validators,
 } from '@angular/forms';
 
+import { AuthService } from 'src/app/services/auth.service';
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent {
-  isLogPage = false;
+  isLogPage = true;
+
+  constructor(private authService: AuthService) {
+
+  }
 
   logInForm = new FormGroup({
     email: new FormControl('', Validators.required),
@@ -29,7 +35,7 @@ export class AuthComponent {
   }
 
   onSubmitLogIn() {
-    console.log(this.logInForm.value);
+    this.authService.login(this.logInForm.controls['email'].value, this.logInForm.controls['password'].value);
   }
 
   onSubmitSignUp() {

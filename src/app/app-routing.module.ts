@@ -19,7 +19,6 @@ const routes: Routes = [
   {
     path: 'cancel-reservation',
     loadChildren: () => import('./cancel-reservation/cancel-reservation.module').then(m => m.CancelReservationModule),
-    canActivate: [AuthGuard] // Apply the AuthGuard to this route
   },
   {
     path: '',

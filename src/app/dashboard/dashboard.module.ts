@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { ReservationCalendarModule } from 'interactive-reservation-calendar';
@@ -21,6 +24,9 @@ import { ReservationsModule } from 'src/app/reservations/reservations.module';
     ReservationsModule,
     EditBoxModule,
     MatTabsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [],
   exports: [],

@@ -8,24 +8,32 @@ import {
 } from '@angular/router';
 
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    const isLoggedIn = true; // Implement logic to check if the user is logged in
+    return new Observable<boolean | UrlTree>(observer => {
+      this.authService.loggedInUser$.subscribe(loggedInUser => {
+        if (loggedInUser) {
+          observer.next(true);
+        } else {
+          // Redirect the user to the authentication page
+          observer.next(this.router.createUrlTree(['/auth'])); // User is not authenticated, redirect to login page
+        }
 
-    if (isLoggedIn) {
-      return true; // Allow the user to access the route
-    } else {
-      // Redirect the user to the authentication page
-      return this.router.parseUrl('/auth');
-    }
+        observer.complete();
+      })
+    });
   }
 }

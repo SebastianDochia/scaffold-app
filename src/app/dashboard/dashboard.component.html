@@ -10,3 +10,38 @@
         </div>
     </mat-tab>
 </mat-tab-group>
+
+<div class="user-button">
+    <button mat-fab
+            [matMenuTriggerFor]="menu">
+        <ng-container *ngIf="loggedInUser$ | async; else outlineIcon">
+            <mat-icon>person</mat-icon>
+        </ng-container>
+    </button>
+</div>
+
+<mat-menu #menu="matMenu">
+    <ng-container *ngIf="loggedInUser$ | async; else logSignMenu">
+        <button mat-menu-item>
+            <mat-icon>person_outline</mat-icon>
+            <span>Sign-out</span>
+        </button>
+    </ng-container>
+</mat-menu>
+
+<ng-template #outlineIcon>
+    <mat-icon>person_outline</mat-icon>
+</ng-template>
+
+<ng-template #logSignMenu>
+    <button mat-menu-item
+            (click)="goToAuth()">
+        <mat-icon>person</mat-icon>
+        <span>Log-in</span>
+    </button>
+    <button mat-menu-item
+            (click)="goToAuth()">
+        <mat-icon>person_add</mat-icon>
+        <span>Sign-up</span>
+    </button>
+</ng-template>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import {
   DateFilters,
@@ -10,6 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 import {
   DEFAULT_SYSTEM_CONFIG,
 } from 'src/app/reservation-calendar/constants/default-system-config';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,11 +20,21 @@ import {
 })
 export class DashboardComponent {
   sysConf: BehaviorSubject<SystemConfig> = new BehaviorSubject(DEFAULT_SYSTEM_CONFIG);
+  loggedInUser$ = this.authService.loggedInUser$;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   onDataChange(event: DateFilters) {
     const currentSysConfig = this.sysConf.getValue();
     currentSysConfig.dateFilters = event;
 
     this.sysConf.next(currentSysConfig);
+  }
+
+  goToAuth() {
+    this.router.navigate(["/auth"]);
   }
 }
