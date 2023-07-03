@@ -37,11 +37,7 @@ export class AuthComponent {
   }
 
   onSubmitLogIn() {
-    this.authService.login(this.logInForm.controls['email'].value, this.logInForm.controls['password'].value).subscribe(success => {
-      if (success) {
-        this.router.navigate(['/dashboard']);
-      }
-    });
+    this.authService.login(this.logInForm.controls['email'].value, this.logInForm.controls['password'].value);
 
   }
 

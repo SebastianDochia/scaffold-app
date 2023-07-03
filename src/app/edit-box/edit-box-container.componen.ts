@@ -28,7 +28,6 @@ import {
   selector: 'eb-edit-box',
   templateUrl: './edit-box-container.component.html',
   styleUrls: ['./edit-box-container.component.scss'],
-
 })
 export class EditBoxComponent {
   @Output() filterDates = new EventEmitter<DateFilters>();
@@ -54,7 +53,7 @@ export class EditBoxComponent {
   });
 
   servicesForm = new FormGroup({
-    firstOptionName: new FormControl(this.systemConfig.specificOptions.optionName, Validators.required),
+    firstOptionName: new FormControl('', Validators.required),
     services: new FormControl('', Validators.required),
     subOption: new FormControl('', Validators.required),
     subOptionPrice: new FormControl('', Validators.required),
@@ -152,8 +151,12 @@ export class EditBoxComponent {
     }
   }
 
-  onSubmit() {
+  onSubmitDates() {
     console.log(this.datesForm.value);
+  }
+
+  onSubmitServices() {
+    console.log(this.servicesForm.value);
   }
 
   private toggleDate(switchFrom: Array<Date>, switchTo: Array<Date>, date: Date) {

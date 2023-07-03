@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 
 import {
@@ -11,6 +14,9 @@ import { BehaviorSubject } from 'rxjs';
 import {
   DEFAULT_SYSTEM_CONFIG,
 } from 'src/app/reservation-calendar/constants/default-system-config';
+import {
+  ReservationService,
+} from 'src/app/reservation-calendar/services/reservation.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -18,14 +24,25 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   sysConf: BehaviorSubject<SystemConfig> = new BehaviorSubject(DEFAULT_SYSTEM_CONFIG);
   loggedInUser$ = this.authService.loggedInUser$;
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private reservationService: ReservationService
   ) { }
+
+  ngOnInit(): void {
+    this.getSystemConfig();
+  }
+
+  private getSystemConfig() {
+    this.reservationService.getSystemConfig().subscribe((response: SystemConfig) => {
+      this.sysConf.next(response);
+    })
+  }
 
   onDataChange(event: DateFilters) {
     const currentSysConfig = this.sysConf.getValue();

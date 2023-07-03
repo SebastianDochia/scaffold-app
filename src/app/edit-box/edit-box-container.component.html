@@ -3,7 +3,8 @@
         <mat-tab-group>
             <mat-tab label="Services Options">
                 <form class="services-form column"
-                      [formGroup]="servicesForm">
+                      [formGroup]="servicesForm"
+                      (ngSubmit)="onSubmitServices()">
                     <div class="side-by-side-group">
                         <div class="column">
                             <mat-form-field appearance="fill">
@@ -92,7 +93,7 @@
             <mat-tab label="Calendar Options">
                 <form class="options-form column"
                       [formGroup]="datesForm"
-                      (ngSubmit)="onSubmit()">
+                      (ngSubmit)="onSubmitDates()">
                     <div class="side-by-side-group">
                         <mat-form-field appearance="fill">
                             <mat-label>Booking Duration</mat-label>

@@ -29,7 +29,7 @@ import {
 })
 export class SpecificsComponent implements OnInit {
   @Input() systemConfig: SystemConfig = DEFAULT_SYSTEM_CONFIG;
-  @Output() userSelection = new EventEmitter<SpecificsUserSelection>()
+  @Output() userSelection = new EventEmitter<SpecificsUserSelection>();
 
   selectedData: any = null;
   selectedFirstOption: ServiceOption | null = null;
@@ -46,7 +46,7 @@ export class SpecificsComponent implements OnInit {
   }
 
   selectSecondOption(selection: MatOptionSelectionChange) {
-    this.selectedSecondOption = selection.source.value
+    this.selectedSecondOption = selection.source.value;
   }
 
   isSelectionComplete(): boolean {
@@ -54,7 +54,7 @@ export class SpecificsComponent implements OnInit {
       return this.selectedFirstOption !== null && this.selectedSecondOption !== null;
     }
 
-    return this.selectedFirstOption !== null
+    return this.selectedFirstOption !== null;
   }
 
   confirmSelection() {

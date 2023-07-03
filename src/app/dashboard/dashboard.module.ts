@@ -5,12 +5,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 
-import { ReservationCalendarModule } from 'interactive-reservation-calendar';
 import { DashboardComponent } from 'src/app/dashboard/dashboard.component';
 import {
   DashboardRoutingModule,
 } from 'src/app/dashboard/dashboard.routing.module';
 import { EditBoxModule } from 'src/app/edit-box/edit-box.module';
+import {
+  ReservationCalendarModule,
+} from 'src/app/reservation-calendar/reservation-calendar.module';
 import { ReservationsModule } from 'src/app/reservations/reservations.module';
 
 @NgModule({

@@ -5,8 +5,8 @@
     <mat-tab label="Customize Widget">
         <div class="wraping-flex">
             <irc-reservation-calendar [systemConfig]="sysConf"></irc-reservation-calendar>
-
-            <eb-edit-box (filterDates)="onDataChange($event)"></eb-edit-box>
+            <eb-edit-box (filterDates)="onDataChange($event)"
+                         [systemConfig]="(sysConf | async)!"></eb-edit-box>
         </div>
     </mat-tab>
 </mat-tab-group>

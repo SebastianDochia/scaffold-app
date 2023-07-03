@@ -1,6 +1,7 @@
 <div class="body">
     <ng-container *ngIf="isAtSpecificsStep() else calendarView">
-        <rc-specifics (userSelection)="onUserSelection($event)">
+        <rc-specifics (userSelection)="onUserSelection($event)"
+                      [systemConfig]="(systemConfig | async)!">
         </rc-specifics>
     </ng-container>
 </div>
