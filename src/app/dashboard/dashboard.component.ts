@@ -37,4 +37,9 @@ export class DashboardComponent {
   goToAuth() {
     this.router.navigate(["/auth"]);
   }
+
+  signOut() {
+    this.authService.logout();
+    this.goToAuth();
+  }
 }

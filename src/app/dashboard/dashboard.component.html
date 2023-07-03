@@ -21,8 +21,10 @@
 </div>
 
 <mat-menu #menu="matMenu">
-    <ng-container *ngIf="loggedInUser$ | async; else logSignMenu">
-        <button mat-menu-item>
+    <ng-container *ngIf="loggedInUser$ | async as loggedInUser; else logSignMenu">
+        <span class="custom-menu-item">{{ loggedInUser }}</span>
+        <button mat-menu-item
+                (click)="signOut()">
             <mat-icon>person_outline</mat-icon>
             <span>Sign-out</span>
         </button>

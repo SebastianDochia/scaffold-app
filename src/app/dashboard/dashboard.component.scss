@@ -27,3 +27,9 @@ app-reservations {
     top: 25px;
     z-index: 1000;
 }
+
+.custom-menu-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+}

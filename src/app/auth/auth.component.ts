@@ -4,6 +4,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -15,9 +16,10 @@ import { AuthService } from 'src/app/services/auth.service';
 export class AuthComponent {
   isLogPage = true;
 
-  constructor(private authService: AuthService) {
-
-  }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   logInForm = new FormGroup({
     email: new FormControl('', Validators.required),
@@ -35,7 +37,12 @@ export class AuthComponent {
   }
 
   onSubmitLogIn() {
-    this.authService.login(this.logInForm.controls['email'].value, this.logInForm.controls['password'].value);
+    this.authService.login(this.logInForm.controls['email'].value, this.logInForm.controls['password'].value).subscribe(success => {
+      if (success) {
+        this.router.navigate(['/dashboard']);
+      }
+    });
+
   }
 
   onSubmitSignUp() {

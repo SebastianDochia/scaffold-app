@@ -25,6 +25,7 @@ export class AuthGuard implements CanActivate {
 
     return new Observable<boolean | UrlTree>(observer => {
       this.authService.loggedInUser$.subscribe(loggedInUser => {
+        console.log(loggedInUser);
         if (loggedInUser) {
           observer.next(true);
         } else {
