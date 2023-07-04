@@ -6,6 +6,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import {
+  ReservationData,
+} from 'src/app/reservation-calendar/models/reservation-data';
+import {
   SystemConfig,
 } from 'src/app/reservation-calendar/models/system-config';
 
@@ -31,6 +34,11 @@ export class ReservationService {
   updateServices() {
     const headers = this.getHeaders();
 
+  }
+
+  makeReservation(data: ReservationData) {
+    const headers = this.getHeaders();
+    this.http.post('http://localhost:3000/reservations', data, { headers }).subscribe();
   }
 
   getHeaders() {

@@ -13,4 +13,5 @@ export interface SystemConfig {
   hours: BusinessHours,
   minDate: Date,
   maxDate: Date,
+  companyId?: string,
 }

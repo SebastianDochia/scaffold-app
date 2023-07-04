@@ -1,10 +1,18 @@
 <div class="cancel-container">
-    <mat-card>
-        <mat-card-content>
+    <mat-card *ngIf="reservationData">
+        <mat-card-content *ngIf="!isActionComplete; else done">
             <h1>Cancel Reservation?</h1>
+            <span>{{ reservationData.date | date:'medium' }}</span>
+            <span> {{ reservationData.service }}</span>
+            <span> {{ reservationData.subOption }}</span>
             <div class="spacer"></div>
             <button mat-raised-button
-                    color="warn">Cancel</button>
+                    color="warn"
+                    (click)="onCancelReservation()">Cancel Reservation</button>
         </mat-card-content>
     </mat-card>
 </div>
+
+<ng-template #done>
+    <mat-icon aria-hidden="true">check_circle_outline</mat-icon>
+</ng-template>

@@ -31,10 +31,16 @@ import {
 import {
   FilterWeekends,
 } from 'src/app/reservation-calendar/date-filters/filter-weekends';
+import {
+  ReservationData,
+} from 'src/app/reservation-calendar/models/reservation-data';
 import { StyleConfig } from 'src/app/reservation-calendar/models/style-config';
 import {
   SystemConfig,
 } from 'src/app/reservation-calendar/models/system-config';
+import {
+  ReservationService,
+} from 'src/app/reservation-calendar/services/reservation.service';
 
 @Component({
   selector: 'rc-calendar-view',
@@ -56,7 +62,9 @@ export class CalendarViewComponent implements OnInit {
 
   selected: Date | null = null;
 
-  constructor() { }
+  constructor(
+    private reservationService: ReservationService
+  ) { }
 
   ngOnInit(): void {
     this.systemConfig.pipe(takeUntil(this.destroy$)).subscribe((value: SystemConfig) => {
@@ -89,9 +97,9 @@ export class CalendarViewComponent implements OnInit {
     return '';
   }
 
-  onSelectDateTime(dateTime: Date) {
-    this.selected = dateTime;
-    console.log(this.selected);
+  onSelectDateTime(data: ReservationData) {
+    this.selected = data.start_date;
+    this.reservationService.makeReservation(data);
   }
 
   ngOnDestroy() {

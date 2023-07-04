@@ -1,16 +1,18 @@
 import {
+  AfterViewInit,
   Component,
-  OnInit,
 } from '@angular/core';
 
+import { first } from 'rxjs/operators';
 import { Reservation } from 'src/app/reservation-calendar/models/reservation';
+import { ReservationsService } from 'src/app/services/reservations.service';
 
 @Component({
   selector: 'app-reservations',
   templateUrl: './reservations.component.html',
   styleUrls: ['./reservations.component.scss']
 })
-export class ReservationsComponent implements OnInit {
+export class ReservationsComponent implements AfterViewInit {
   selected: Date | null = null;
   displayedColumns: string[] = ['date', 'phoneNumber', 'service', 'subOption', 'name'];
   reservations: Array<Reservation> = [{
@@ -22,9 +24,19 @@ export class ReservationsComponent implements OnInit {
     name: 'Mihael Dumbrava',
   }];
 
-  constructor() { }
+  constructor(
+    private reservationsService: ReservationsService
+  ) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    this.getReservationsForSelectedDay(this.selected);
+  }
+
+  getReservationsForSelectedDay(date: Date | null) {
+    const dateToGet = date ?? new Date();
+    this.reservationsService.getReservationsForDate(dateToGet).pipe(first()).subscribe(data => {
+      this.reservations = data;
+    });
   }
 
 }

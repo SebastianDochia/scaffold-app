@@ -6,3 +6,12 @@ export interface Reservation {
   email: string,
   name?: string,
 }
+
+export interface ReservationResponse {
+  start_date: Date,
+  phone: string,
+  service: string,
+  title: string,
+  email: string,
+  name?: string,
+}

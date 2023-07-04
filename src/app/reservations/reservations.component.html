@@ -1,6 +1,7 @@
 <mat-card>
     <mat-card-content>
-        <mat-calendar [(selected)]="selected"></mat-calendar>
+        <mat-calendar [(selected)]="selected"
+                      (selectedChange)="getReservationsForSelectedDay(selected)"></mat-calendar>
 
         <table class="table"
                mat-table
