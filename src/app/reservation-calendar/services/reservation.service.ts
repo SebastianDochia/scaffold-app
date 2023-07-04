@@ -19,8 +19,18 @@ export class ReservationService {
   ) { }
 
   getSystemConfig() {
-    const headers = this.getHeaders()
+    const headers = this.getHeaders();
     return this.http.get<SystemConfig>('http://localhost:3000/system', { headers });
+  }
+
+  updateDates(data: { bookingDuration: number, openingHour: Date, closingHour: Date, weekendOpeningHour: Date, weekendClosingHour: Date }, filterWeekends: boolean, filterSpecificDates: Array<Date>, filterSpecificDatesEveryYear: Array<Date>) {
+    const headers = this.getHeaders();
+    this.http.put('http://localhost:3000/system', { ...data, filterWeekends, filterSpecificDates, filterSpecificDatesEveryYear }, { headers }).subscribe();
+  }
+
+  updateServices() {
+    const headers = this.getHeaders();
+
   }
 
   getHeaders() {
@@ -29,4 +39,5 @@ export class ReservationService {
       'Authorization': `Bearer ${token}`
     });
   }
+
 }

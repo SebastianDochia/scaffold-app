@@ -23,6 +23,9 @@ import {
 import {
   SystemConfig,
 } from 'src/app/reservation-calendar/models/system-config';
+import {
+  ReservationService,
+} from 'src/app/reservation-calendar/services/reservation.service';
 
 @Component({
   selector: 'eb-edit-box',
@@ -58,6 +61,8 @@ export class EditBoxComponent {
     subOption: new FormControl('', Validators.required),
     subOptionPrice: new FormControl('', Validators.required),
   });
+
+  constructor(private reservationService: ReservationService) { }
 
   onFirstOptionNameChange() {
     this.systemConfig.specificOptions.optionName = this.servicesForm.get('firstOptionName')?.value;
@@ -153,6 +158,7 @@ export class EditBoxComponent {
 
   onSubmitDates() {
     console.log(this.datesForm.value);
+    this.reservationService.updateDates(this.datesForm.value, this.openWeekends, this.filterSpecificDates, this.filterSpecificDatesEveryYear);
   }
 
   onSubmitServices() {
