@@ -158,7 +158,7 @@ export class EditBoxComponent {
 
   onSubmitDates() {
     console.log(this.datesForm.value);
-    this.reservationService.updateDates(this.datesForm.value, this.openWeekends, this.filterSpecificDates, this.filterSpecificDatesEveryYear);
+    this.reservationService.updateDates(this.datesForm.value, this.openWeekends, this.filterSpecificDates, this.filterSpecificDatesEveryYear, this.systemConfig.companyId!);
   }
 
   onSubmitServices() {

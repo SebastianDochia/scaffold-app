@@ -21,4 +21,5 @@ export const DEFAULT_SYSTEM_CONFIG: SystemConfig = {
   hours: DEFAULT_BUSINESS_HOURS,
   minDate: new Date(),
   maxDate: new Date(new Date().getFullYear() + 1, 11, 31),
+  companyId: '64763918376126d9bdb61e80'
 };

@@ -41,7 +41,7 @@ export class ReservationCalendarComponent implements OnInit {
   constructor(private reservationService: ReservationService) { }
 
   ngOnInit(): void {
-    this.getSystemConfig();
+    //this.getSystemConfig();
   }
 
   private getSystemConfig() {
@@ -57,6 +57,8 @@ export class ReservationCalendarComponent implements OnInit {
   onUserSelection(selection: SpecificsUserSelection) {
     console.log(selection);
     this.specificsSelection = selection;
+
+    this.reservationService.selection = selection;
 
     this.step = ReservationStep.CALENDAR;
   }
