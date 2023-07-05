@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AuthRoutingModule } from 'src/app/auth/auth-routing.module';
 import { AuthComponent } from 'src/app/auth/auth.component';
@@ -22,6 +23,7 @@ import { AuthComponent } from 'src/app/auth/auth.component';
     MatFormFieldModule,
     MatButtonModule,
     ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [],
   exports: [],

@@ -62,6 +62,15 @@
                                type="password"
                                formControlName="password">
                     </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Subscription Type</mat-label>
+                        <mat-select formControlName="subscription">
+                            <mat-option *ngFor="let option of options"
+                                        [value]="option">
+                                {{ option }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
                     <div class="to-sign-up">
                         <p>Have an account?</p>
                         <button type="button"

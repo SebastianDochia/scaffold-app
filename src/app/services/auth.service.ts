@@ -39,8 +39,8 @@ export class AuthService {
       });
   }
 
-  signUp() {
-
+  signUp(data: any) {
+    return this.http.post<any>('http://localhost:3000/auth/register', { ...data, role: 'admin' });
   }
 
   logout(): void {

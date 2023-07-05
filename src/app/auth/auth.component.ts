@@ -15,6 +15,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AuthComponent {
   isLogPage = true;
+  options = ['Basic', 'Pro', 'AI']
 
   constructor(
     private authService: AuthService,
@@ -29,7 +30,8 @@ export class AuthComponent {
   signUpForm = new FormGroup({
     name: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
+    password: new FormControl('', Validators.required),
+    subscription: new FormControl('', Validators.required)
   });
 
   togglePage() {
@@ -43,5 +45,8 @@ export class AuthComponent {
 
   onSubmitSignUp() {
     console.log(this.signUpForm.value);
+    this.authService.signUp(this.signUpForm.value).subscribe(res => {
+      this.togglePage();
+    });
   }
 }
