@@ -14,8 +14,9 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent {
-  isLogPage = true;
+  isLogPage = false;
   options = ['Basic', 'Pro', 'AI']
+  selected = 'Pro'
 
   constructor(
     private authService: AuthService,
@@ -31,7 +32,7 @@ export class AuthComponent {
     name: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
-    subscription: new FormControl('', Validators.required)
+    subscription: new FormControl(this.selected, Validators.required)
   });
 
   togglePage() {

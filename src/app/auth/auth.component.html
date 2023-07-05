@@ -64,7 +64,8 @@
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label>Subscription Type</mat-label>
-                        <mat-select formControlName="subscription">
+                        <mat-select formControlName="subscription"
+                                    [(value)]="selected">
                             <mat-option *ngFor="let option of options"
                                         [value]="option">
                                 {{ option }}
